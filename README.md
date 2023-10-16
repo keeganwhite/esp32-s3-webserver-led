@@ -40,7 +40,7 @@ The Webpage will look like this once you are connected and navigate to [http://1
 ## Running Code
 You can use the ESP IDF plugin for VS Code to easily build your code, and flash and monitor your device. However, here 
 are the manual lines of code that you can run. Ensure you have your environment variables set for this to work or 
-use absolute paths.
+use absolute paths. [Here](example-vscode-config) is example VS Code workspace config files.
 1. Clean the project: `idf.py fullclean`
 2. Build the project `idf.py build`
 3. Set target chip: `idf.py set-target esp32s3`
