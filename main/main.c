@@ -1,11 +1,3 @@
-/*  WiFi softAP Example
-
-   This example code is in the Public Domain (or CC0 licensed, at your option.)
-
-   Unless required by applicable law or agreed to in writing, this
-   software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-   CONDITIONS OF ANY KIND, either express or implied.
-*/
 #include <string.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -30,11 +22,7 @@
 
 static const char *TAG = "webserver";
 
-/* The examples use WiFi configuration that you can set via project configuration menu.
 
-   If you'd rather not, just change the below entries to strings with
-   the config you want - ie #define EXAMPLE_WIFI_SSID "mywifissid"
-*/
 #define EXAMPLE_ESP_WIFI_SSID      CONFIG_ESP_WIFI_SSID
 #define EXAMPLE_ESP_WIFI_PASS      CONFIG_ESP_WIFI_PASSWORD
 #define EXAMPLE_ESP_WIFI_CHANNEL   CONFIG_ESP_WIFI_CHANNEL
@@ -79,7 +67,7 @@ static const httpd_uri_t ledon = {
                  "</style>"\
                  "</head>"\
                  "<body>"\
-                 "<h1>ESP32-S3 Webser</h1>"\
+                 "<h1>ESP32-S3 Webserver</h1>"\
                  "<p>Change LED State</p>"\
                  "<h3>LED STATE: ON<h3>"\
                  "<button class=\"button button1\" onclick = \"window.location.href='/ledoff'\">TURN LED OFF</button>"\
@@ -127,7 +115,7 @@ static const httpd_uri_t ledoff = {
                  "</style>"\
                  "</head>"\
                  "<body>"\
-                 "<h1>ESP32-S3 Webser</h1>"\
+                 "<h1>ESP32-S3 Webserver</h1>"\
                  "<p>Change LED State</p>"\
                  "<h3>LED STATE: OFF<h3>"\
                  "<button class=\"button button1\" onclick = \"window.location.href='/ledon'\">TURN LED ON</button>"\
@@ -136,17 +124,7 @@ static const httpd_uri_t ledoff = {
 };
 
 
-/* This handler allows the custom error handling functionality to be
- * tested from client side. For that, when a PUT request 0 is sent to
- * URI /ctrl, the /hello and /echo URIs are unregistered and following
- * custom error handler http_404_error_handler() is registered.
- * Afterwards, when /hello or /echo is requested, this custom error
- * handler is invoked which, after sending an error message to client,
- * either closes the underlying socket (when requested URI is /echo)
- * or keeps it open (when requested URI is /hello). This allows the
- * client to infer if the custom error handler is functioning as expected
- * by observing the socket state.
- */
+
 esp_err_t http_404_error_handler(httpd_req_t *req, httpd_err_code_t err)
 {
 
@@ -164,6 +142,8 @@ static httpd_handle_t start_webserver(void)
     // Setting port as 8001 when building for Linux. Port 80 can be used only by a priviliged user in linux.
     // So when a unpriviliged user tries to run the application, it throws bind error and the server is not started.
     // Port 8001 can be used by an unpriviliged user as well. So the application will not throw bind error and the
+    // server will be started.
+    config.server_port = 8001;
     // server will be started.
     config.server_port = 8001;
 #endif // !CONFIG_IDF_TARGET_LINUX
@@ -299,5 +279,4 @@ void app_main(void)
 
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_AP_STAIPASSIGNED, &connect_handler, &server));
-    // ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, WIFI_EVENT_STA_DISCONNECTED, &disconnect_handler, &server));
 }
