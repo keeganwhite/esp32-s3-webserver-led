@@ -10,13 +10,14 @@ This repo contains the code to build and run an ESP32 S3 board as a webserver an
 ## Demo
 1. Connect the 3.3V out pin to your LED on the pin labeled 'V'.
 2. Connect the group pin of the ESP32 board to the negative rail on your breadboard.
-3. Connect any GPIO pin to the pin labeled by an 'R' on the LED. _I am using pin 1 in mode code._
+3. Connect any GPIO pin to the pin labelled by an 'R' on the LED. _I am using pin 1 in my code._
 4. Power the board
 5. Flash the board, full instructions [here](#running-code).
 6. Connect to the WiFi network named `esp32_wifi` the board will provide with password: `password`.
+7. Navigate to the web server [here](http://192.168.4.1/ledon) or [here](http://192.168.4.1/ledoff) in your browser
 
 ### Full Set Up
-Full set up described above:
+Full set-up described above:
 
 <img alt="full-setup" height="400" src="images/full-setup.jpg" width="200"/>
 
